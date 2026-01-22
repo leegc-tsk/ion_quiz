@@ -1,496 +1,498 @@
-!DOCTYPE html
-html lang=en-GB
-head
-    meta charset=UTF-8
-    meta name=viewport content=width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no
-    titleIon Master Pop Challengetitle
-    script src=httpscdnjs.cloudflare.comajaxlibsjspdf2.5.1jspdf.umd.min.jsscript
-    script src=httpscdnjs.cloudflare.comajaxlibsjspdf-autotable3.5.31jspdf.plugin.autotable.min.jsscript
-    link href=httpsfonts.googleapis.comcss2family=Fredokawght@400;600&display=swap rel=stylesheet
-    style
-        root {
-            --pop-orange #FFB74D;
-            --pop-yellow #FFEB3B;
-            --pop-green #4DB6AC;
-            --pop-pink #FF8A80;
-            --pop-blue #4FC3F7;
-            --pop-dark #5D4037;
-            --bg-pattern #FFF3E0;
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ion Master: Pop Challenge</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --pop-orange: #FFB74D;
+            --pop-yellow: #FFEB3B;
+            --pop-green: #4DB6AC;
+            --pop-pink: #FF8A80;
+            --pop-blue: #4FC3F7;
+            --pop-dark: #5D4037;
+            --bg-pattern: #FFF3E0;
         }
 
-         { box-sizing border-box; }
+        * { box-sizing: border-box; }
 
         body {
-            font-family 'Fredoka', 'Comic Sans MS', sans-serif;
-            background-color var(--bg-pattern);
-            background-image radial-gradient(#FFCC80 15%, transparent 16%), radial-gradient(#FFCC80 15%, transparent 16%);
-            background-size 20px 20px;
-            background-position 0 0, 10px 10px;
-            margin 0;
-            display flex;
-            justify-content center;
-            padding 15px;
-            touch-action manipulation;
-            color var(--pop-dark);
+            font-family: 'Fredoka', 'Comic Sans MS', sans-serif;
+            background-color: var(--bg-pattern);
+            background-image: radial-gradient(#FFCC80 15%, transparent 16%), radial-gradient(#FFCC80 15%, transparent 16%);
+            background-size: 20px 20px;
+            background-position: 0 0, 10px 10px;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            padding: 15px;
+            touch-action: manipulation;
+            color: var(--pop-dark);
         }
 
         #auth-screen, #game-screen, #result-screen {
-            background white;
-            padding 2rem;
-            border-radius 25px;
-            box-shadow 0 8px 0 rgba(0,0,0,0.1);
-            border 4px solid var(--pop-orange);
-            width 100%;
-            max-width 600px;
-            text-align center;
-            position relative;
+            background: white;
+            padding: 2rem;
+            border-radius: 25px;
+            box-shadow: 0 8px 0 rgba(0,0,0,0.1);
+            border: 4px solid var(--pop-orange);
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
         }
 
-        .hidden { display none !important; }
+        .hidden { display: none !important; }
 
         h1 {
-            color var(--pop-pink);
-            font-size 2.5rem;
-            margin 0 0 10px 0;
-            text-shadow 2px 2px 0 #FFF, 4px 4px 0 rgba(0,0,0,0.1);
+            color: var(--pop-pink);
+            font-size: 2.5rem;
+            margin: 0 0 10px 0;
+            text-shadow: 2px 2px 0 #FFF, 4px 4px 0 rgba(0,0,0,0.1);
         }
 
         .input-group {
-            display flex;
-            flex-direction column;
-            gap 12px;
-            margin 20px 0;
-            align-items center;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin: 20px 0;
+            align-items: center;
         }
 
         input, select {
-            padding 15px;
-            border 3px solid var(--pop-blue);
-            border-radius 50px;
-            font-size 1.1rem;
-            width 100%;
-            font-family inherit;
-            outline none;
-            transition transform 0.2s;
-            text-align center;
-            background #FAFAFA;
+            padding: 15px;
+            border: 3px solid var(--pop-blue);
+            border-radius: 50px;
+            font-size: 1.1rem;
+            width: 100%;
+            font-family: inherit;
+            outline: none;
+            transition: transform 0.2s;
+            text-align: center;
+            background: #FAFAFA;
         }
 
-        inputfocus, selectfocus {
-            transform scale(1.02);
-            border-color var(--pop-pink);
+        input:focus, select:focus {
+            transform: scale(1.02);
+            border-color: var(--pop-pink);
         }
 
         button {
-            background var(--pop-green);
-            color white;
-            border none;
-            padding 15px 20px;
-            border-radius 50px;
-            cursor pointer;
-            font-size 1.2rem;
-            font-weight 600;
-            margin 8px 0;
-            width 100%;
-            font-family inherit;
-            box-shadow 0 6px 0 #00897B;
-            transition all 0.1s;
-            position relative;
-            top 0;
+            background: var(--pop-green);
+            color: white;
+            border: none;
+            padding: 15px 20px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin: 8px 0;
+            width: 100%;
+            font-family: inherit;
+            box-shadow: 0 6px 0 #00897B;
+            transition: all 0.1s;
+            position: relative;
+            top: 0;
         }
         
-        buttonactive {
-            top 6px;
-            box-shadow 0 0 0 #00897B;
+        button:active {
+            top: 6px;
+            box-shadow: 0 0 0 #00897B;
         }
 
         button.secondary {
-            background var(--pop-orange);
-            box-shadow 0 6px 0 #F57C00;
+            background: var(--pop-orange);
+            box-shadow: 0 6px 0 #F57C00;
         }
-        button.secondaryactive { box-shadow 0 0 0 #F57C00; }
+        button.secondary:active { box-shadow: 0 0 0 #F57C00; }
         
         button.level3 {
-            background var(--pop-pink);
-            box-shadow 0 6px 0 #D32F2F;
+            background: var(--pop-pink);
+            box-shadow: 0 6px 0 #D32F2F;
         }
-        button.level3active { box-shadow 0 0 0 #D32F2F; }
+        button.level3:active { box-shadow: 0 0 0 #D32F2F; }
 
         button.change-level-btn {
-            background #90A4AE;
-            box-shadow 0 6px 0 #546E7A;
-            margin-top 15px;
-            font-size 1rem;
+            background: #90A4AE;
+            box-shadow: 0 6px 0 #546E7A;
+            margin-top: 15px;
+            font-size: 1rem;
         }
-        button.change-level-btnactive { box-shadow 0 0 0 #546E7A; }
+        button.change-level-btn:active { box-shadow: 0 0 0 #546E7A; }
 
         .info-bar {
-            background var(--pop-yellow);
-            padding 15px;
-            border-radius 20px;
-            margin-bottom 20px;
-            font-size 1rem;
-            box-shadow 0 4px 0 #FBC02D;
-            border 2px solid #FBC02D;
+            background: var(--pop-yellow);
+            padding: 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            font-size: 1rem;
+            box-shadow: 0 4px 0 #FBC02D;
+            border: 2px solid #FBC02D;
         }
         
         .info-row {
-            display flex;
-            justify-content space-between;
-            margin-bottom 5px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
         }
 
         #beaker-wrapper {
-            position relative;
-            width 100px;
-            margin 15px auto;
+            position: relative;
+            width: 100px;
+            margin: 15px auto;
         }
 
         #beaker-container {
-            width 80px;
-            height 120px;
-            border 5px solid var(--pop-dark);
-            border-top none;
-            border-radius 0 0 25px 25px;
-            position relative;
-            background white;
-            overflow hidden;
-            margin 0 auto;
+            width: 80px;
+            height: 120px;
+            border: 5px solid var(--pop-dark);
+            border-top: none;
+            border-radius: 0 0 25px 25px;
+            position: relative;
+            background: white;
+            overflow: hidden;
+            margin: 0 auto;
         }
 
         #beaker-liquid {
-            position absolute;
-            bottom 0;
-            width 100%;
-            height 0%;
-            background var(--pop-orange);
-            border-top 4px solid rgba(255,255,255,0.4);
-            transition height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            height: 0%;
+            background: var(--pop-orange);
+            border-top: 4px solid rgba(255,255,255,0.4);
+            transition: height 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
         
-        #beaker-liquidafter {
-            content .。o○;
-            position absolute;
-            top 5px;
-            left 50%;
-            transform translateX(-50%);
-            color rgba(255,255,255,0.6);
-            font-size 1.2rem;
-            animation floatBubbles 2s infinite ease-in-out;
+        #beaker-liquid::after {
+            content: ".。o○";
+            position: absolute;
+            top: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: rgba(255,255,255,0.6);
+            font-size: 1.2rem;
+            animation: floatBubbles 2s infinite ease-in-out;
         }
 
-        @keyframes floatBubbles { 0%, 100% { transform translateX(-50%) translateY(0); } 50% { transform translateX(-50%) translateY(-5px); } }
+        @keyframes floatBubbles { 0%, 100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(-5px); } }
 
         #beaker-percent {
-            position absolute;
-            top 50%;
-            left 50%;
-            transform translate(-50%, -50%);
-            font-weight 800;
-            font-size 1.4rem;
-            color var(--pop-dark);
-            z-index 10;
-            text-shadow 2px 2px 0 white;
-            background rgba(255,255,255,0.7);
-            padding 2px 8px;
-            border-radius 10px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--pop-dark);
+            z-index: 10;
+            text-shadow: 2px 2px 0 white;
+            background: rgba(255,255,255,0.7);
+            padding: 2px 8px;
+            border-radius: 10px;
         }
 
-        .game-grid { display flex; flex-direction column; gap 15px; }
-        .column { display grid; grid-template-columns 1fr 1fr; gap 12px; }
+        .game-grid { display: flex; flex-direction: column; gap: 15px; }
+        .column { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 
         .spelling-grid {
-            display grid;
-            grid-template-columns 1fr;
-            gap 15px;
-            max-height 400px;
-            overflow-y auto;
-            padding 5px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 15px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding: 5px;
         }
         
         .spelling-card {
-            background #FFF8E1;
-            border 3px solid var(--pop-orange);
-            border-radius 15px;
-            padding 10px;
-            display flex;
-            align-items center;
-            gap 10px;
+            background: #FFF8E1;
+            border: 3px solid var(--pop-orange);
+            border-radius: 15px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .symbol-display {
-            font-family 'Times New Roman', serif;
-            font-size 1.5rem;
-            font-weight bold;
-            background white;
-            padding 10px;
-            border-radius 10px;
-            border 2px solid var(--pop-blue);
-            min-width 80px;
-            text-align center;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            border: 2px solid var(--pop-blue);
+            min-width: 80px;
+            text-align: center;
         }
 
         .spelling-input-container {
-            flex-grow 1;
-            display flex;
-            align-items center;
-            gap 5px;
+            flex-grow: 1;
+            display: flex;
+            align-items: center;
+            gap: 5px;
         }
 
         .spelling-input {
-            width 100%;
-            padding 10px;
-            border 2px solid #ccc;
-            border-radius 10px;
-            font-size 1rem;
-            text-align left;
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            font-size: 1rem;
+            text-align: left;
         }
 
         .ion-suffix {
-            font-weight 600;
-            color var(--pop-dark);
-            font-size 1.1rem;
+            font-weight: 600;
+            color: var(--pop-dark);
+            font-size: 1.1rem;
         }
 
         .card {
-            background white;
-            border 3px solid var(--pop-blue);
-            color var(--pop-dark);
-            padding 10px;
-            border-radius 15px;
-            font-size 1.3rem;
-            font-weight bold;
-            font-family 'Times New Roman', serif;
-            min-height 55px;
-            display flex;
-            align-items center;
-            justify-content center;
-            cursor pointer;
-            box-shadow 0 4px 0 #29B6F6;
-            transition transform 0.1s;
+            background: white;
+            border: 3px solid var(--pop-blue);
+            color: var(--pop-dark);
+            padding: 10px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            font-weight: bold;
+            font-family: 'Times New Roman', serif;
+            min-height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #29B6F6;
+            transition: transform 0.1s;
         }
 
-        .cardactive { transform translateY(4px); box-shadow 0 0 0 #29B6F6; }
+        .card:active { transform: translateY(4px); box-shadow: 0 0 0 #29B6F6; }
 
         .card.selected {
-            background var(--pop-blue);
-            color white;
-            border-color #0288D1;
-            box-shadow 0 4px 0 #0277BD;
-            transform translateY(-2px);
+            background: var(--pop-blue);
+            color: white;
+            border-color: #0288D1;
+            box-shadow: 0 4px 0 #0277BD;
+            transform: translateY(-2px);
         }
 
         .drop-zone {
-            background #FFF8E1;
-            border 3px dashed var(--pop-orange);
-            padding 10px;
-            border-radius 15px;
-            min-height 60px;
-            display flex;
-            flex-direction column;
-            align-items center;
-            justify-content center;
-            font-size 1rem;
-            text-align center;
-            font-weight 600;
+            background: #FFF8E1;
+            border: 3px dashed var(--pop-orange);
+            padding: 10px;
+            border-radius: 15px;
+            min-height: 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            text-align: center;
+            font-weight: 600;
         }
         
         .drop-zone.filled {
-            background #E0F2F1;
-            border-style solid;
-            border-color var(--pop-green);
+            background: #E0F2F1;
+            border-style: solid;
+            border-color: var(--pop-green);
         }
 
         #restart-modal {
-            position fixed;
-            top 0; left 0; width 100%; height 100%;
-            background rgba(0,0,0,0.5);
-            display flex;
-            justify-content center;
-            align-items center;
-            z-index 1000;
-            backdrop-filter blur(2px);
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.5);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(2px);
         }
 
         .modal-content {
-            background white;
-            padding 30px;
-            border-radius 25px;
-            border 5px solid var(--pop-pink);
-            max-width 90%;
-            width 400px;
-            text-align center;
-            box-shadow 0 10px 25px rgba(0,0,0,0.2);
-            animation popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display flex;
-            flex-direction column;
-            max-height 90vh;
+            background: white;
+            padding: 30px;
+            border-radius: 25px;
+            border: 5px solid var(--pop-pink);
+            max-width: 90%;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            max-height: 90vh;
         }
 
-        @keyframes popIn { 0% { transform scale(0.5); opacity 0; } 100% { transform scale(1); opacity 1; } }
+        @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
-        .modal-emoji { font-size 3rem; margin-bottom 10px; display block;}
+        .modal-emoji { font-size: 3rem; margin-bottom: 10px; display: block;}
 
         #modal-review-list {
-            text-align left;
-            overflow-y auto;
-            background #FFF3E0;
-            padding 10px;
-            border-radius 10px;
-            margin 10px 0;
-            border 2px solid #FFCC80;
-            flex-grow 1;
-            font-size 0.9rem;
+            text-align: left;
+            overflow-y: auto;
+            background: #FFF3E0;
+            padding: 10px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border: 2px solid #FFCC80;
+            flex-grow: 1;
+            font-size: 0.9rem;
         }
 
         .review-item {
-            margin-bottom 8px;
-            border-bottom 1px solid rgba(0,0,0,0.1);
-            padding-bottom 5px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+            padding-bottom: 5px;
         }
 
         #review-area {
-            text-align left;
-            margin 15px 0;
-            max-height 250px;
-            overflow-y auto;
-            padding 10px;
-            background #FAFAFA;
-            border-radius 15px;
-            border 2px solid #EEE;
+            text-align: left;
+            margin: 15px 0;
+            max-height: 250px;
+            overflow-y: auto;
+            padding: 10px;
+            background: #FAFAFA;
+            border-radius: 15px;
+            border: 2px solid #EEE;
         }
 
-        .correct { color var(--pop-green); font-weight bold; margin-bottom 8px; }
-        .incorrect { color var(--pop-pink); font-weight bold; margin-bottom 8px; }
+        .correct { color: var(--pop-green); font-weight: bold; margin-bottom: 8px; }
+        .incorrect { color: var(--pop-pink); font-weight: bold; margin-bottom: 8px; }
 
-        #emoji-pop { position fixed; font-size 3rem; pointer-events none; animation floatUp 2s forwards; z-index 200; }
-        @keyframes floatUp { 0% { transform translateY(0); opacity 1; } 100% { transform translateY(-300px); opacity 0; } }
-    style
-head
-body
+        #emoji-pop { position: fixed; font-size: 3rem; pointer-events: none; animation: floatUp 2s forwards; z-index: 200; }
+        @keyframes floatUp { 0% { transform: translateY(0); opacity: 1; } 100% { transform: translateY(-300px); opacity: 0; } }
+    </style>
+</head>
+<body>
 
-    !-- Registration Screen --
-    div id=auth-screen
-        h1🧪 Ion Masterh1
-        p style=font-size 1.1rem; color #777;Match the Ion Name to its Symbol!p
+    <!-- Registration Screen -->
+    <div id="auth-screen">
+        <h1>🧪 Ion Master</h1>
+        <p style="font-size: 1.1rem; color: #777;">Match the Ion Name to its Symbol!</p>
         
-        div class=input-group
-            input type=text id=stu-name placeholder=Your Name
-            select id=class-select
-                option value=3AClass 3Aoption
-                option value=3BClass 3Boption
-                option value=3CClass 3Coption
-                option value=3DClass 3Doption
-            select
-            input type=number id=class-no placeholder=Class Number
-        div
+        <div class="input-group">
+            <input type="text" id="stu-name" placeholder="Your Name">
+            <select id="class-select">
+                <option value="3A">Class 3A</option>
+                <option value="3B">Class 3B</option>
+                <option value="3C">Class 3C</option>
+                <option value="3D">Class 3D</option>
+            </select>
+            <input type="number" id="class-no" placeholder="Class Number">
+        </div>
         
-        pstrongChoose Your Challengestrongp
-        button onclick=startGame(1)⭐ Level 1 Apprenticebutton
-        button onclick=startGame(2) class=secondary🔥 Level 2 Alchemistbutton
-        button onclick=startGame(3) class=level3✍️ Level 3 Spell Masterbutton
-    div
+        <p><strong>Choose Your Challenge:</strong></p>
+        <button onclick="startGame(1)">⭐ Level 1: Apprentice</button>
+        <button onclick="startGame(2)" class="secondary">🔥 Level 2: Alchemist</button>
+        <button onclick="startGame(3)" class="level3">✍️ Level 3: Spell Master</button>
+    </div>
 
-    !-- Game Screen --
-    div id=game-screen class=hidden
-        div class=info-bar
-            div class=info-row
-                span📅 span id=display-datespanspan
-                span🔄 Attempt span id=display-attempt1spanspan
-            div
-            div class=info-row
-                span👤 span id=display-userspanspan
-                span⏱️ span id=display-timer0000spanspan
-            div
-        div
+    <!-- Game Screen -->
+    <div id="game-screen" class="hidden">
+        <div class="info-bar">
+            <div class="info-row">
+                <span>📅 <span id="display-date"></span></span>
+                <span>🔄 Attempt: <span id="display-attempt">1</span></span>
+            </div>
+            <div class="info-row">
+                <span>👤 <span id="display-user"></span></span>
+                <span>⏱️ <span id="display-timer">00:00</span></span>
+            </div>
+        </div>
         
-        !-- Cute Progress Tracker --
-        div id=beaker-wrapper
-            div id=beaker-percent0%div
-            div id=beaker-container
-                div id=beaker-liquiddiv
-            div
-        div
+        <!-- Cute Progress Tracker -->
+        <div id="beaker-wrapper">
+            <div id="beaker-percent">0%</div>
+            <div id="beaker-container">
+                <div id="beaker-liquid"></div>
+            </div>
+        </div>
         
-        div id=instruction-box style=background #E1F5FE; padding 10px; border-radius 15px; color #0277BD; margin-bottom 15px;
-            👇 Tap strongSymbolstrong first, then tap strongNamestrong!
-        div
+        <div id="instruction-box" style="background: #E1F5FE; padding: 10px; border-radius: 15px; color: #0277BD; margin-bottom: 15px;">
+            👇 Tap <strong>Symbol</strong> first, then tap <strong>Name</strong>!
+        </div>
 
-        !-- Container for Levels 1 & 2 --
-        div id=match-game-grid class=game-grid
-            div id=symbols-column class=columndiv
-            div style=text-align center; color var(--pop-orange); font-weight bold; font-size 1.5rem;⬇️ MATCH ⬇️div
-            div id=names-column class=columndiv
-        div
+        <!-- Container for Levels 1 & 2 -->
+        <div id="match-game-grid" class="game-grid">
+            <div id="symbols-column" class="column"></div>
+            <div style="text-align: center; color: var(--pop-orange); font-weight: bold; font-size: 1.5rem;">⬇️ MATCH ⬇️</div>
+            <div id="names-column" class="column"></div>
+        </div>
 
-        !-- Container for Level 3 --
-        div id=spell-game-grid class=spelling-grid hiddendiv
+        <!-- Container for Level 3 -->
+        <div id="spell-game-grid" class="spelling-grid hidden"></div>
         
-        button id=submit-btn style=margin-top 25px; onclick=checkAnswers()✨ Submit Result ✨button
-        button class=change-level-btn onclick=changeLevel()↩ Change Levelbutton
-    div
+        <button id="submit-btn" style="margin-top: 25px;" onclick="checkAnswers()">✨ Submit Result ✨</button>
+        <button onclick="returnToMenu()" style="background: #90A4AE; box-shadow: 0 6px 0 #546E7A; margin-top: 15px; flex: 1;">Change Level</button>
+    </div>
 
-    !-- Results Screen --
-    div id=result-screen class=hidden
-        h2 id=result-title style=color var(--pop-green);Game Resultsh2
-        div id=score-display style=font-size 1.8rem; font-weight 800; color var(--pop-dark); margin 10px 0;div
-        div id=review-areadiv
-        button onclick=downloadPDF() style=background var(--pop-blue); box-shadow 0 6px 0 #0288D1;📄 Download Result (PDF)button
-        button id=restart-action-btn onclick=replayLevel() class=secondary🔄 Restart Gamebutton
-        button onclick=returnToMenu() style=background #90A4AE; box-shadow 0 6px 0 #546E7A; margin-top 10px; width 100%; border none; padding 15px; border-radius 50px; color white; font-size 1rem; font-weight 600; cursor pointer;↩ Change Levelbutton
-    div
+    <!-- Results Screen -->
+    <div id="result-screen" class="hidden">
+        <h2 id="result-title" style="color: var(--pop-green);">Game Results</h2>
+        <div id="score-display" style="font-size: 1.8rem; font-weight: 800; color: var(--pop-dark); margin: 10px 0;"></div>
+        <div id="review-area"></div>
+        <button onclick="downloadPDF()" style="background: var(--pop-blue); box-shadow: 0 6px 0 #0288D1;">📄 Download Result (PDF)</button>
+        <button id="restart-action-btn" onclick="replayLevel()" class="secondary">🔄 Restart Game</button>
+        <button onclick="returnToMenu()" style="background: #90A4AE; box-shadow: 0 6px 0 #546E7A; margin-top: 10px; width: 100%; border: none; padding: 15px; border-radius: 50px; color: white; font-size: 1rem; font-weight: 600; cursor: pointer;">↩ Change Level</button>
+    </div>
 
-    !-- Custom Restart Modal --
-    div id=restart-modal class=hidden
-        div class=modal-content
-            span class=modal-emoji🥺span
-            h2 style=color var(--pop-pink); margin 5px 0;Oh no!h2
-            p id=modal-msg style=font-size 1rem; margin 10px 0;You need 80% to pass.p
-            div style=font-weight bold; color var(--pop-dark); text-align left; margin-bottom 5px;Learning Pointsdiv
-            div id=modal-review-listdiv
-            button onclick=confirmRestart() style=background var(--pop-pink); box-shadow 0 6px 0 #D32F2F; margin-top 15px;Try Again!button
-            button onclick=returnToMenu() style=background #90A4AE; box-shadow 0 6px 0 #546E7A; margin-top 10px; width 100%; border none; padding 15px; border-radius 50px; color white; font-size 1rem; font-weight 600; cursor pointer;↩ Change Levelbutton
-        div
-    div
+    <!-- Custom Restart Modal -->
+    <div id="restart-modal" class="hidden">
+        <div class="modal-content">
+            <span class="modal-emoji">🥺</span>
+            <h2 style="color: var(--pop-pink); margin: 5px 0;">Oh no!</h2>
+            <p id="modal-msg" style="font-size: 1rem; margin: 10px 0;">You need 80% to pass.</p>
+            <div style="font-weight: bold; color: var(--pop-dark); text-align: left; margin-bottom: 5px;">Learning Points:</div>
+            <div id="modal-review-list"></div>
+            <div style="display: flex; gap: 10px; justify-content: center; width: 100%;">
+                <button onclick="confirmRestart()" style="background: var(--pop-pink); box-shadow: 0 6px 0 #D32F2F; margin-top: 15px; flex: 1;">Try Again!</button>
+                <button onclick="returnToMenu()" style="background: #90A4AE; box-shadow: 0 6px 0 #546E7A; margin-top: 15px; flex: 1;">Change Level</button>
+            </div>
+        </div>
+    </div>
 
-    script
-         --- DATA ---
+    <script>
+        // --- DATA ---
         
-         Level 1 Standard ions.
+        // Level 1: Standard ions.
         const poolLevel1 = [
-            { n Ammonium ion, s NH₄⁺ }, { n Sodium ion, s Na⁺ }, { n Potassium ion, s K⁺ }, 
-            { n Magnesium ion, s Mg²⁺ }, { n Calcium ion, s Ca²⁺ }, { n Zinc ion, s Zn²⁺ },
-            { n Aluminium ion, s Al³⁺ }, { n Nitrate ion, s NO₃⁻ }, { n Dichromate ion, s Cr₂O₇²⁻ },
-            { n Chromate ion, s CrO₄²⁻ }, { n Sulphate ion, s SO₄²⁻ }, { n Carbonate ion, s CO₃²⁻ }, 
-            { n Hydroxide ion, s OH⁻ }, { n Chloride ion, s Cl⁻ }, { n Oxide ion, s O²⁻ }
+            { n: "Ammonium ion", s: "NH₄⁺" }, { n: "Sodium ion", s: "Na⁺" }, { n: "Potassium ion", s: "K⁺" }, 
+            { n: "Magnesium ion", s: "Mg²⁺" }, { n: "Calcium ion", s: "Ca²⁺" }, { n: "Zinc ion", s: "Zn²⁺" },
+            { n: "Aluminium ion", s: "Al³⁺" }, { n: "Nitrate ion", s: "NO₃⁻" }, { n: "Dichromate ion", s: "Cr₂O₇²⁻" },
+            { n: "Chromate ion", s: "CrO₄²⁻" }, { n: "Sulphate ion", s: "SO₄²⁻" }, { n: "Carbonate ion", s: "CO₃²⁻" }, 
+            { n: "Hydroxide ion", s: "OH⁻" }, { n: "Chloride ion", s: "Cl⁻" }, { n: "Oxide ion", s: "O²⁻" }
         ];
 
-         Level 2 PolyatomicMultivalent. Added Cyanide. No organic. Updated spellings.
+        // Level 2: Polyatomic/Multivalent. Added Cyanide. No organic. Updated spellings.
         const poolLevel2 = [
-            { n Iron(II) ion, s Fe²⁺ }, { n Iron(III) ion, s Fe³⁺ }, { n Copper(II) ion, s Cu²⁺ },
-            { n Lead(II) ion, s Pb²⁺ }, { n Permanganate ion, s MnO₄⁻ }, { n Phosphate ion, s PO₄³⁻ }, 
-            { n Sulphite ion, s SO₃²⁻ }, { n Hydrogencarbonate ion, s HCO₃⁻ }, { n Hydrogensulphate ion, s HSO₄⁻ },
-            { n Nitrite ion, s NO₂⁻ }, { n Barium ion, s Ba²⁺ }, { n Bromide ion, s Br⁻ }, 
-            { n Iodide ion, s I⁻ }, { n Silver ion, s Ag⁺ }, { n Fluoride ion, s F⁻ },
-            { n Cyanide ion, s CN⁻ }
+            { n: "Iron(II) ion", s: "Fe²⁺" }, { n: "Iron(III) ion", s: "Fe³⁺" }, { n: "Copper(II) ion", s: "Cu²⁺" },
+            { n: "Lead(II) ion", s: "Pb²⁺" }, { n: "Permanganate ion", s: "MnO₄⁻" }, { n: "Phosphate ion", s: "PO₄³⁻" }, 
+            { n: "Sulphite ion", s: "SO₃²⁻" }, { n: "Hydrogencarbonate ion", s: "HCO₃⁻" }, { n: "Hydrogensulphate ion", s: "HSO₄⁻" },
+            { n: "Nitrite ion", s: "NO₂⁻" }, { n: "Barium ion", s: "Ba²⁺" }, { n: "Bromide ion", s: "Br⁻" }, 
+            { n: "Iodide ion", s: "I⁻" }, { n: "Silver ion", s: "Ag⁺" }, { n: "Fluoride ion", s: "F⁻" },
+            { n: "Cyanide ion", s: "CN⁻" }
         ];
 
-         Level 3 Mostly Polyatomic. 
+        // Level 3: Mostly Polyatomic. 
         const polyatomicPool = [
-            poolLevel1[0], poolLevel1[7], poolLevel1[8], poolLevel1[9], poolLevel1[10], poolLevel1[11], poolLevel1[12],  L1 Poly
-            poolLevel2[4], poolLevel2[5], poolLevel2[6], poolLevel2[7], poolLevel2[8], poolLevel2[9], poolLevel2[15]   L2 Poly
+            poolLevel1[0], poolLevel1[7], poolLevel1[8], poolLevel1[9], poolLevel1[10], poolLevel1[11], poolLevel1[12], // L1 Poly
+            poolLevel2[4], poolLevel2[5], poolLevel2[6], poolLevel2[7], poolLevel2[8], poolLevel2[9], poolLevel2[15]  // L2 Poly
         ];
         
-         Add some challenging monoatomic to fill
+        // Add some challenging monoatomic to fill
         const poolLevel3 = [
             ...polyatomicPool,
-            { n Nitride ion, s N³⁻ },
-            { n Oxide ion, s O²⁻ },
-            { n Aluminium ion, s Al³⁺ },
-            { n Lead(II) ion, s Pb²⁺ }
+            { n: "Nitride ion", s: "N³⁻" },
+            { n: "Oxide ion", s: "O²⁻" },
+            { n: "Aluminium ion", s: "Al³⁺" },
+            { n: "Lead(II) ion", s: "Pb²⁺" }
         ];
 
-         Config
+        // Config
         const QUESTIONS_PER_ROUND = 12;
 
         let currentQuestions = [];
@@ -503,15 +505,15 @@ body
         let sessionHistory = []; 
 
         function startGame(level) {
-            if (!document.getElementById('stu-name').value  !document.getElementById('class-no').value) 
-                return alert(Please fill in your details!);
+            if (!document.getElementById('stu-name').value || !document.getElementById('class-no').value) 
+                return alert("Please fill in your details!");
             
-             Lock in details if not set
+            // Lock in details if not set
             if(!userData.name) {
                 userData.name = document.getElementById('stu-name').value;
                 userData.class = document.getElementById('class-select').value;
                 userData.no = document.getElementById('class-no').value;
-                const dateOptions = { weekday 'short', year 'numeric', month 'short', day 'numeric' };
+                const dateOptions = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
                 userData.date = new Date().toLocaleDateString('en-GB', dateOptions);
             }
 
@@ -524,18 +526,27 @@ body
             document.getElementById('display-date').innerText = userData.date;
             document.getElementById('display-attempt').innerText = attemptCount;
 
-             Pick 12 random questions
-            let pool = (level === 1)  [...poolLevel1]  (level === 2)  [...poolLevel2]  [...poolLevel3];
-            currentQuestions = pool.sort(() = Math.random() - 0.5).slice(0, QUESTIONS_PER_ROUND);
+            // Pick 12 random questions
+            let pool = (level === 1) ? [...poolLevel1] : (level === 2) ? [...poolLevel2] : [...poolLevel3];
+            currentQuestions = pool.sort(() => Math.random() - 0.5).slice(0, QUESTIONS_PER_ROUND);
 
             initGame();
             startTimer();
         }
 
-        function changeLevel() {
-            if(!confirm(Change level This will mark current attempt as Incomplete.)) return;
-            logAttempt(Incomplete, `0${QUESTIONS_PER_ROUND}`);
-            returnToMenu();
+        function replayLevel() {
+            attemptCount++;
+            seconds = 0;
+            document.getElementById('display-timer').innerText = "00:00";
+            document.getElementById('result-screen').classList.add('hidden');
+            document.getElementById('game-screen').classList.remove('hidden');
+            document.getElementById('display-attempt').innerText = attemptCount;
+
+            let pool = (currentLevel === 1) ? [...poolLevel1] : (currentLevel === 2) ? [...poolLevel2] : [...poolLevel3];
+            currentQuestions = pool.sort(() => Math.random() - 0.5).slice(0, QUESTIONS_PER_ROUND);
+            
+            initGame();
+            startTimer();
         }
 
         function returnToMenu() {
@@ -545,34 +556,19 @@ body
             document.getElementById('result-screen').classList.add('hidden');
             document.getElementById('auth-screen').classList.remove('hidden');
             
-             Keep user details filled
+            // Keep user details filled
             document.getElementById('stu-name').value = userData.name;
             document.getElementById('class-select').value = userData.class;
             document.getElementById('class-no').value = userData.no;
         }
 
-        function replayLevel() {
-            attemptCount++;
-            seconds = 0;
-            document.getElementById('display-timer').innerText = 0000;
-            document.getElementById('result-screen').classList.add('hidden');
-            document.getElementById('game-screen').classList.remove('hidden');
-            document.getElementById('display-attempt').innerText = attemptCount;
-
-            let pool = (currentLevel === 1)  [...poolLevel1]  (currentLevel === 2)  [...poolLevel2]  [...poolLevel3];
-            currentQuestions = pool.sort(() = Math.random() - 0.5).slice(0, QUESTIONS_PER_ROUND);
-            
-            initGame();
-            startTimer();
-        }
-
         function logAttempt(result, scoreStr) {
             sessionHistory.push({
-                level currentLevel,
-                attempt attemptCount,
-                result result,
-                score scoreStr,
-                time document.getElementById('display-timer').innerText
+                level: currentLevel,
+                attempt: attemptCount,
+                result: result,
+                score: scoreStr,
+                time: document.getElementById('display-timer').innerText
             });
             attemptCount++; 
         }
@@ -580,45 +576,45 @@ body
         function initGame() {
             document.getElementById('match-game-grid').classList.add('hidden');
             document.getElementById('spell-game-grid').classList.add('hidden');
-            document.getElementById('beaker-liquid').style.height = 0%;
-            document.getElementById('beaker-percent').innerText = 0%;
+            document.getElementById('beaker-liquid').style.height = "0%";
+            document.getElementById('beaker-percent').innerText = "0%";
 
             if (currentLevel === 3) {
                 document.getElementById('spell-game-grid').classList.remove('hidden');
-                document.getElementById('instruction-box').innerHTML = ✍️ Type the strongNamestrong. The word 'ion' is given!;
+                document.getElementById('instruction-box').innerHTML = "✍️ Type the <strong>Name</strong>. The word 'ion' is given!";
                 
                 const grid = document.getElementById('spell-game-grid');
-                grid.innerHTML = ;
+                grid.innerHTML = "";
                 
-                currentQuestions.forEach((q, idx) = {
+                currentQuestions.forEach((q, idx) => {
                     const div = document.createElement('div');
                     div.className = 'spelling-card';
                     div.innerHTML = `
-                        div class=symbol-display${q.s}div
-                        div class=spelling-input-container
-                            input type=text class=spelling-input id=input-${idx} placeholder=e.g. Sodium oninput=updateBeakerSpelling()
-                            span class=ion-suffixionspan
-                        div
+                        <div class="symbol-display">${q.s}</div>
+                        <div class="spelling-input-container">
+                            <input type="text" class="spelling-input" id="input-${idx}" placeholder="e.g. Sodium" oninput="updateBeakerSpelling()">
+                            <span class="ion-suffix">ion</span>
+                        </div>
                     `;
                     grid.appendChild(div);
                 });
 
             } else {
                 document.getElementById('match-game-grid').classList.remove('hidden');
-                document.getElementById('instruction-box').innerHTML = 👇 Tap strongSymbolstrong first, then tap strongNamestrong!;
+                document.getElementById('instruction-box').innerHTML = "👇 Tap <strong>Symbol</strong> first, then tap <strong>Name</strong>!";
                 
                 const namesCol = document.getElementById('names-column');
                 const symbolsCol = document.getElementById('symbols-column');
-                namesCol.innerHTML = ;
-                symbolsCol.innerHTML = ;
+                namesCol.innerHTML = "";
+                symbolsCol.innerHTML = "";
 
-                const shuffledSymbols = [...currentQuestions].sort(() = Math.random() - 0.5);
-                shuffledSymbols.forEach(q = {
+                const shuffledSymbols = [...currentQuestions].sort(() => Math.random() - 0.5);
+                shuffledSymbols.forEach(q => {
                     const div = document.createElement('div');
                     div.className = 'card';
                     div.innerText = q.s; 
                     div.dataset.val = q.s;
-                    div.onclick = () = {
+                    div.onclick = () => {
                         if(div.parentElement.className.includes('drop-zone')) {
                             document.getElementById('symbols-column').appendChild(div);
                             div.parentElement.classList.remove('filled');
@@ -628,19 +624,19 @@ body
                         if (selectedSymbolCard) selectedSymbolCard.classList.remove('selected');
                         selectedSymbolCard = div;
                         div.classList.add('selected');
-                        div.style.transform = scale(1.1);
-                        setTimeout(() = div.style.transform = scale(1), 150);
+                        div.style.transform = "scale(1.1)";
+                        setTimeout(() => div.style.transform = "scale(1)", 150);
                     };
                     symbolsCol.appendChild(div);
                 });
 
-                const shuffledNames = [...currentQuestions].sort(() = Math.random() - 0.5);
-                shuffledNames.forEach(q = {
+                const shuffledNames = [...currentQuestions].sort(() => Math.random() - 0.5);
+                shuffledNames.forEach(q => {
                     const div = document.createElement('div');
                     div.className = 'drop-zone';
-                    div.innerHTML = `span${q.n}span`;
+                    div.innerHTML = `<span>${q.n}</span>`;
                     div.dataset.correctSymbol = q.s;
-                    div.onclick = () = {
+                    div.onclick = () => {
                         if (selectedSymbolCard) {
                             if (div.querySelector('.card')) {
                                 document.getElementById('symbols-column').appendChild(div.querySelector('.card'));
@@ -659,7 +655,7 @@ body
 
         function updateBeaker() {
             const filledCount = document.querySelectorAll('.drop-zone .card').length;
-            const percentage = Math.round((filledCount  QUESTIONS_PER_ROUND)  100);
+            const percentage = Math.round((filledCount / QUESTIONS_PER_ROUND) * 100);
             document.getElementById('beaker-liquid').style.height = `${percentage}%`;
             document.getElementById('beaker-percent').innerText = `${percentage}%`;
         }
@@ -667,18 +663,18 @@ body
         function updateBeakerSpelling() {
             const inputs = document.querySelectorAll('.spelling-input');
             let filled = 0;
-            inputs.forEach(inp = { if(inp.value.trim().length  0) filled++; });
-            const percentage = Math.round((filled  QUESTIONS_PER_ROUND)  100);
+            inputs.forEach(inp => { if(inp.value.trim().length > 0) filled++; });
+            const percentage = Math.round((filled / QUESTIONS_PER_ROUND) * 100);
             document.getElementById('beaker-liquid').style.height = `${percentage}%`;
             document.getElementById('beaker-percent').innerText = `${percentage}%`;
         }
 
         function startTimer() {
-            timerInterval = setInterval(() = {
+            timerInterval = setInterval(() => {
                 seconds++;
-                let m = String(Math.floor(seconds60)).padStart(2,'0');
+                let m = String(Math.floor(seconds/60)).padStart(2,'0');
                 let s = String(seconds%60).padStart(2,'0');
-                document.getElementById('display-timer').innerText = `${m}${s}`;
+                document.getElementById('display-timer').innerText = `${m}:${s}`;
             }, 1000);
         }
 
@@ -686,41 +682,41 @@ body
             let filledCount = 0;
             if(currentLevel === 3) {
                  const inputs = document.querySelectorAll('.spelling-input');
-                 inputs.forEach(inp = { if(inp.value.trim().length  0) filledCount++; });
+                 inputs.forEach(inp => { if(inp.value.trim().length > 0) filledCount++; });
             } else {
                  filledCount = document.querySelectorAll('.drop-zone .card').length;
             }
 
-            if (filledCount  QUESTIONS_PER_ROUND) return alert(`Please answer all ${QUESTIONS_PER_ROUND} questions first! 😊`);
+            if (filledCount < QUESTIONS_PER_ROUND) return alert(`Please answer all ${QUESTIONS_PER_ROUND} questions first! 😊`);
 
             clearInterval(timerInterval);
             let score = 0;
-            let resultsText = ;
-            let wrongAnswersHTML = ;
+            let resultsText = "";
+            let wrongAnswersHTML = "";
             const review = document.getElementById('review-area');
-            review.innerHTML = ;
+            review.innerHTML = "";
 
             if (currentLevel === 3) {
-                currentQuestions.forEach((q, idx) = {
+                currentQuestions.forEach((q, idx) => {
                     const inputVal = document.getElementById(`input-${idx}`).value.trim();
-                    const userGuess = inputVal +  ion;
+                    const userGuess = inputVal + " ion";
                     const correctName = q.n;
-                    const isCorrect = userGuess.toLowerCase().replace(s+g, ' ') === correctName.toLowerCase().replace(s+g, ' ');
+                    const isCorrect = userGuess.toLowerCase().replace(/\s+/g, ' ') === correctName.toLowerCase().replace(/\s+/g, ' ');
                     
                     if (isCorrect) score++;
                     else {
-                        wrongAnswersHTML += `div class=review-item❌ strongSymbol ${q.s}strongbrYou typed ${inputVal}brspan style=color#2ecc71Correct ${correctName}spandiv`;
+                        wrongAnswersHTML += `<div class="review-item">❌ <strong>Symbol: ${q.s}</strong><br>You typed: ${inputVal}<br><span style="color:#2ecc71">Correct: ${correctName}</span></div>`;
                     }
 
                     const p = document.createElement('div');
-                    p.className = isCorrect  'correct'  'incorrect';
-                    p.innerHTML = `${isCorrect  '✅'  '❌'} strongSymbol ${q.s}strongbrYour Answer ${inputVal} ion ${!isCorrect  'brCorrect ' + correctName  ''}`;
+                    p.className = isCorrect ? 'correct' : 'incorrect';
+                    p.innerHTML = `${isCorrect ? '✅' : '❌'} <strong>Symbol: ${q.s}</strong><br>Your Answer: ${inputVal} ion ${!isCorrect ? '<br>Correct: ' + correctName : ''}`;
                     review.appendChild(p);
-                    resultsText += `${isCorrect  'PASS'  'FAIL'}  Symbol ${q.s}  Ans ${inputVal} ion  Ref ${correctName}n`;
+                    resultsText += `${isCorrect ? 'PASS' : 'FAIL'} | Symbol: ${q.s} | Ans: ${inputVal} ion | Ref: ${correctName}\n`;
                 });
             } else {
                 const zones = document.querySelectorAll('.drop-zone');
-                zones.forEach(zone = {
+                zones.forEach(zone => {
                     const questionName = zone.querySelector('span').innerText;
                     const userSymbolCard = zone.querySelector('.card');
                     const userSymbol = userSymbolCard.innerText;
@@ -729,26 +725,26 @@ body
                     const isCorrect = (userSymbol === correctSymbol);
                     if (isCorrect) score++;
                     else {
-                        wrongAnswersHTML += `div class=review-item❌ strong${questionName}strongbrYou matched ${userSymbol}brspan style=color#2ecc71Correct ${correctSymbol}spandiv`;
+                        wrongAnswersHTML += `<div class="review-item">❌ <strong>${questionName}</strong><br>You matched: ${userSymbol}<br><span style="color:#2ecc71">Correct: ${correctSymbol}</span></div>`;
                     }
 
                     const p = document.createElement('div');
-                    p.className = isCorrect  'correct'  'incorrect';
-                    p.innerHTML = `${isCorrect  '✅'  '❌'} strong${questionName}strongbrYour Answer ${userSymbol} ${!isCorrect  '(Correct ' + correctSymbol + ')'  ''}`;
+                    p.className = isCorrect ? 'correct' : 'incorrect';
+                    p.innerHTML = `${isCorrect ? '✅' : '❌'} <strong>${questionName}</strong><br>Your Answer: ${userSymbol} ${!isCorrect ? '(Correct: ' + correctSymbol + ')' : ''}`;
                     review.appendChild(p);
-                    resultsText += `${isCorrect  'PASS'  'FAIL'}  Question ${questionName}  Answer ${userSymbol}n`;
+                    resultsText += `${isCorrect ? 'PASS' : 'FAIL'} | Question: ${questionName} | Answer: ${userSymbol}\n`;
                 });
             }
 
-            if (score  10) {
-                logAttempt(Fail, `${score}${QUESTIONS_PER_ROUND}`);
-                document.getElementById('modal-msg').innerHTML = `You scored strong${score}${QUESTIONS_PER_ROUND}strong.brThat's below 80%. Let's review before trying again!`;
+            if (score < 10) {
+                logAttempt("Fail", `${score}/${QUESTIONS_PER_ROUND}`);
+                document.getElementById('modal-msg').innerHTML = `You scored <strong>${score}/${QUESTIONS_PER_ROUND}</strong>.<br>That's below 80%. Let's review before trying again!`;
                 document.getElementById('modal-review-list').innerHTML = wrongAnswersHTML;
                 document.getElementById('restart-modal').classList.remove('hidden');
                 return;
             }
 
-            logAttempt(Pass, `${score}${QUESTIONS_PER_ROUND}`);
+            logAttempt("Pass", `${score}/${QUESTIONS_PER_ROUND}`);
             
             userData.score = score;
             userData.time = document.getElementById('display-timer').innerText;
@@ -757,13 +753,13 @@ body
 
             document.getElementById('game-screen').classList.add('hidden');
             document.getElementById('result-screen').classList.remove('hidden');
-            document.getElementById('score-display').innerText = `🎉 Score ${score}  ${QUESTIONS_PER_ROUND}`;
+            document.getElementById('score-display').innerText = `🎉 Score: ${score} / ${QUESTIONS_PER_ROUND}`;
 
             if (score === QUESTIONS_PER_ROUND) {
-                document.getElementById('result-title').innerText = Good Job!;
-                for(let i=0; i15; i++) setTimeout(spawnEmoji, i  100);
+                document.getElementById('result-title').innerText = "Good Job!";
+                for(let i=0; i<15; i++) setTimeout(spawnEmoji, i * 100);
             } else {
-                document.getElementById('result-title').innerText = Game Results;
+                document.getElementById('result-title').innerText = "Game Results";
             }
         }
 
@@ -771,10 +767,10 @@ body
             document.getElementById('restart-modal').classList.add('hidden');
             document.getElementById('display-attempt').innerText = attemptCount;
             seconds = 0;
-            document.getElementById('display-timer').innerText = 0000;
+            document.getElementById('display-timer').innerText = "00:00";
             
-            let pool = (currentLevel === 1)  [...poolLevel1]  (currentLevel === 2)  [...poolLevel2]  [...poolLevel3];
-            currentQuestions = pool.sort(() = Math.random() - 0.5).slice(0, QUESTIONS_PER_ROUND);
+            let pool = (currentLevel === 1) ? [...poolLevel1] : (currentLevel === 2) ? [...poolLevel2] : [...poolLevel3];
+            currentQuestions = pool.sort(() => Math.random() - 0.5).slice(0, QUESTIONS_PER_ROUND);
             
             initGame();
             startTimer();
@@ -786,18 +782,18 @@ body
 
             doc.setTextColor(255, 138, 128);
             doc.setFontSize(22);
-            doc.text(Ion Master Result, 20, 20);
+            doc.text("Ion Master Result", 20, 20);
 
             doc.setTextColor(60, 60, 60);
             doc.setFontSize(12);
-            doc.text(`Student ${userData.name}`, 20, 35);
-            doc.text(`Class ${userData.class} (${userData.no})`, 20, 42);
-            doc.text(`Date ${userData.date}`, 20, 49);
+            doc.text(`Student: ${userData.name}`, 20, 35);
+            doc.text(`Class: ${userData.class} (${userData.no})`, 20, 42);
+            doc.text(`Date: ${userData.date}`, 20, 49);
             
             doc.setFont(undefined, 'bold');
-            doc.text(Session History, 20, 60);
+            doc.text("Session History", 20, 60);
             
-            const tableBody = sessionHistory.map(log = [
+            const tableBody = sessionHistory.map(log => [
                 log.attempt,
                 `Level ${log.level}`,
                 log.time,
@@ -806,30 +802,40 @@ body
             ]);
 
             doc.autoTable({
-                startY 65,
-                head [['Attempt', 'Level', 'Time', 'Score', 'Status']],
-                body tableBody,
-                theme 'grid',
-                headStyles { fillColor [255, 183, 77] },
+                startY: 65,
+                head: [['Attempt', 'Level', 'Time', 'Score', 'Status']],
+                body: tableBody,
+                theme: 'grid',
+                headStyles: { fillColor: [255, 183, 77] },
             });
 
             let finalY = doc.lastAutoTable.finalY + 15;
             
             doc.setFont(undefined, 'bold');
-            doc.text(`Final Detailed Analysis (Level ${userData.level})`, 20, finalY);
+            doc.text(`Final Detailed Analysis (Incorrect Only - Level ${userData.level})`, 20, finalY);
             doc.setFont(undefined, 'normal');
             
             let y = finalY + 10;
-            const lines = userData.rawResults.split('n');
+            const lines = userData.rawResults.split('\n');
+            let hasErrors = false;
             
-            lines.forEach(line = {
+            lines.forEach(line => {
                 if (!line) return;
-                if (y  270) { doc.addPage(); y = 20; }
-                if (line.startsWith('PASS')) doc.setTextColor(77, 182, 172);
-                else doc.setTextColor(255, 138, 128);
+                // FILTER: Only show lines starting with FAIL
+                if (!line.startsWith('FAIL')) return;
+
+                hasErrors = true;
+                if (y > 270) { doc.addPage(); y = 20; }
+                
+                doc.setTextColor(255, 138, 128); // Pop Pink for Fail
                 doc.text(line, 20, y);
                 y += 8;
             });
+
+            if (!hasErrors) {
+                doc.setTextColor(77, 182, 172); // Green
+                doc.text("Perfect Score! No incorrect answers to display.", 20, y);
+            }
 
             doc.save(`Result_${userData.name}_L${userData.level}.pdf`);
         }
@@ -838,12 +844,12 @@ body
             const ems = ['🎉','⭐','🍬','🎈','🍭'];
             const d = document.createElement('div');
             d.id = 'emoji-pop';
-            d.innerText = ems[Math.floor(Math.random()ems.length)];
-            d.style.left = Math.random()  80 + 10 + 'vw';
+            d.innerText = ems[Math.floor(Math.random()*ems.length)];
+            d.style.left = Math.random() * 80 + 10 + 'vw';
             d.style.top = '80vh';
             document.body.appendChild(d);
-            setTimeout(() = d.remove(), 2000);
+            setTimeout(() => d.remove(), 2000);
         }
-    script
-body
-html
+    </script>
+</body>
+</html>
