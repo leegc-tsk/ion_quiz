@@ -17,7 +17,6 @@
             --pop-dark: #5D4037;
             --bg-pattern: #FFF3E0;
         }
-
         * { box-sizing: border-box; }
 
         body {
